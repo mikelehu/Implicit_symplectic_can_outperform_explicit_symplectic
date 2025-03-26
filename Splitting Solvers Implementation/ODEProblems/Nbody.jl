@@ -19,6 +19,43 @@ function NbodyEnergy(u,Gm)
 end
 
 
+function NbodyODE!(F,u,Gm,t)
+   N = length(Gm)
+   for i in 1:N
+      for k in 1:3
+          F[k, i, 2] = 0
+      end
+   end
+   for i in 1:N
+      xi = u[1,i,1]
+      yi = u[2,i,1]
+      zi = u[3,i,1]
+      Gmi = Gm[i]
+      for j in i+1:N
+          xij = xi - u[1,j,1]
+          yij = yi - u[2,j,1]
+          zij = zi - u[3,j,1]
+          Gmj = Gm[j]
+          dotij = (xij*xij+yij*yij+zij*zij)
+          auxij = 1/(sqrt(dotij)*dotij)
+          Gmjauxij = Gmj*auxij
+          F[1,i,2] -= Gmjauxij*xij
+          F[2,i,2] -= Gmjauxij*yij
+          F[3,i,2] -= Gmjauxij*zij
+          Gmiauxij = Gmi*auxij
+          F[1,j,2] += Gmiauxij*xij
+          F[2,j,2] += Gmiauxij*yij
+          F[3,j,2] += Gmiauxij*zij
+      end
+   end
+   for i in 1:3, j in 1:N
+      F[i,j,1] = u[i,j,2]
+   end
+  return nothing
+end
+
+
+
 function H1(u,Gm)
 
    N = length(Gm)

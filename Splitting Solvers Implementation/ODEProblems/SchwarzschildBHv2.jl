@@ -1,34 +1,9 @@
 
+#
+#  Schwarzschild problem
+#  (cartesian coordinates)
+#  
 
-
-function Ham_Schwarzschild(u,parms)
-     
-   E=parms[1]
-   L=parms[2]
-   β=parms[3]
-   r=u[1]
-   θ=u[2]
-   pr=u[3]
-   pθ=u[4]
-
-   E2=E*E
-   r2=r*r
-   pr2=pr*pr
-   pθ2=pθ*pθ
-   sinθ=sin(θ)
-   sinθ2=sinθ*sinθ
-   invsinθ2=1/sinθ2
-   invr=1/r
-   invr2=invr*invr
-
-
-   H1=1/2*invr2*invsinθ2*(L-β/2*r2*sinθ2)^2-1/2*(r/(r-2))*E2
-   H2= 1/2*(pr2+pθ2*invr2)
-   H3= -invr*pr2
-
-   return H1+H2+H3
-
-end
 
 function Ham_Schwarzschildv2(u,parms)
      
@@ -45,7 +20,6 @@ function Ham_Schwarzschildv2(u,parms)
    r=sqrt(r2)
    pr2=pr*pr
    pθ2=pθ*pθ
-   #sinθ=x/r
    sinθ=y/r
    sinθ2=sinθ*sinθ
    invsinθ2=1/sinθ2
@@ -61,7 +35,7 @@ function Ham_Schwarzschildv2(u,parms)
 
 end
 
-function H1(u,parms)
+function H1v2(u,parms)
      
    E=parms[1]
    L=parms[2]
@@ -76,7 +50,6 @@ function H1(u,parms)
    r=sqrt(r2)
    pr2=pr*pr
    pθ2=pθ*pθ
-   #sinθ=x/r
    sinθ=y/r
    sinθ2=sinθ*sinθ
    invsinθ2=1/sinθ2
@@ -92,7 +65,7 @@ function H1(u,parms)
 
 end
 
-function H2(u,parms)
+function H2v2(u,parms)
      
    E=parms[1]
    L=parms[2]
@@ -107,7 +80,6 @@ function H2(u,parms)
    r=sqrt(r2)
    pr2=pr*pr
    pθ2=pθ*pθ
-   #sinθ=x/r
    sinθ=y/r
    sinθ2=sinθ*sinθ
    invsinθ2=1/sinθ2
@@ -123,7 +95,7 @@ function H2(u,parms)
 
 end
 
-function H3(u,parms)
+function H3v2(u,parms)
      
    E=parms[1]
    L=parms[2]
@@ -138,7 +110,6 @@ function H3(u,parms)
    r=sqrt(r2)
    pr2=pr*pr
    pθ2=pθ*pθ
-   #sinθ=x/r
    sinθ=y/r
    sinθ2=sinθ*sinθ
    invsinθ2=1/sinθ2
@@ -155,8 +126,8 @@ function H3(u,parms)
 end
 
 
+function flowH1Schwarzschildv2!(uj,ej,h,parms)
 
-function flowH1Schwarzschild_!(uj,ej,h,parms)
 
    E=parms[1]
    L=parms[2]
@@ -170,61 +141,6 @@ function flowH1Schwarzschild_!(uj,ej,h,parms)
    r2=x^2+y^2
    E2=E*E
    r=sqrt(r2)
-   #sinθ=x/r
-   #cosθ=y/r
-   cosθ=x/r
-   sinθ=y/r
-
-   invr=1/r
-   invr2=invr*invr
-   invr3=invr2*invr
-   sinθ2=sinθ*sinθ
-   invsinθ=1/sinθ
-   invsinθ2=invsinθ*invsinθ
-   invsinθ3=invsinθ2*invsinθ
-
-   gradpr=-1/4*β^2*r*sinθ2-E2/(r-2)^2+L^2*invsinθ2*invr3
-   gradpθ=L^2*cosθ*invsinθ3*invr2-1/4*β^2*r2*sinθ*cosθ
-
-
-   uj[3]=pr+h*gradpr
-   uj[4]=pθ+h*gradpθ
-
-   return nothing
-
-
-end
-
-
-function flowH1Schwarzschild!(uj,ej,h,parms)
-
-# 2024-12-16
-
-   E=parms[1]
-   L=parms[2]
-   β=parms[3]
-
-   x=uj[1]
-   y=uj[2]
-   pr=uj[3]
-   pθ=uj[4]
-
-   r2=x^2+y^2
-   E2=E*E
-   r=sqrt(r2)
-   #cosθ=x/r
-   #sinθ=y/r
-
-   #invr=1/r
-   #invr2=invr*invr
-   #invr3=invr2*invr
-   #sinθ2=sinθ*sinθ
-   #invsinθ=1/sinθ
-   #invsinθ2=invsinθ*invsinθ
-   #invsinθ3=invsinθ2*invsinθ
-
-   #gradpr=-1/4*β^2*r*sinθ2-E2/(r-2)^2+L^2*invsinθ2*invr3
-   #gradpθ=L^2*cosθ*invsinθ3*invr2-1/4*β^2*r2*sinθ*cosθ
 
    gradpr=-1/4*β^2*y^2/r-E2/(r-2)^2+L^2/(y^2*r)
    gradpθ=L^2*x/y^3-1/4*β^2*x*y
@@ -238,7 +154,7 @@ function flowH1Schwarzschild!(uj,ej,h,parms)
 end
 
 
-function flowH2Schwarzschild!(uj,ej,h,parms)
+function flowH2Schwarzschildv2!(uj,ej,h,parms)
 
    x=uj[1]
    y=uj[2]
@@ -247,8 +163,6 @@ function flowH2Schwarzschild!(uj,ej,h,parms)
 
    r2=x^2+y^2
    r=sqrt(r2)
-   #sinθ=x/r
-   #cosθ=y/r
    cosθ=x/r
    sinθ=y/r
     
@@ -266,7 +180,7 @@ function flowH2Schwarzschild!(uj,ej,h,parms)
 end
 
 
-function flowH3Schwarzschild!(uj,ej,h,parms)
+function flowH3Schwarzschildv2!(uj,ej,h,parms)
 
    x=uj[1]
    y=uj[2]

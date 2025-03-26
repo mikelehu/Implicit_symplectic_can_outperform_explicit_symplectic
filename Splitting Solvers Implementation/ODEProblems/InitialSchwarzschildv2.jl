@@ -1,3 +1,11 @@
+
+#
+#  Initial values for Schwarzschild problem
+#  (cartesian coordinates)
+#  
+
+
+
 function InitialSchwarzschildv2(T = Float64)
     
     parms = BigFloat[0.995,4.6,8.9e-5]
@@ -13,7 +21,6 @@ function InitialSchwarzschildv2(T = Float64)
  
     x=r*cos(θ)
     y=r*sin(θ)
-    #u0 = convert.(T, [r, θ, pr, pθ])
     u0 = convert.(T, [x, y, pr, pθ])
 
     return u0, parms

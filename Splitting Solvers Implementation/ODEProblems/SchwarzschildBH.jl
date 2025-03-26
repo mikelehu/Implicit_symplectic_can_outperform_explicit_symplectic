@@ -1,7 +1,7 @@
 
 #
-#  function Ham_Schwarzschild(u,parms)
-#  function SchwarzschildODE!(F,u,parms,t)
+#  Schwarzschild problem
+#  (polar coordinates)
 #  
 
 
@@ -143,9 +143,9 @@ function SchwarzschildODE!(F,u,parms,t)
    invr=1/r
    invr2=invr*invr
    invr3=invr2*invr
-   #sinθ=sin(θ)
-   #cosθ=cos(θ)
-   sinθ, cosθ = sincos(θ)
+   # sinθ, cosθ = sincos(θ) # no exist at SIMD
+   sinθ=sin(θ)
+   cosθ=cos(θ)
    sinθ2=sinθ*sinθ
    invsinθ=1/sinθ
    invsinθ2=invsinθ*invsinθ
@@ -179,8 +179,6 @@ function flowH1Schwarzschild!(uj,ej,h,parms)
    invr=1/r
    invr2=invr*invr
    invr3=invr2*invr
-   #sinθ=sin(θ)
-   #cosθ=cos(θ)
    sinθ, cosθ = sincos(θ)
    sinθ2=sinθ*sinθ
    invsinθ=1/sinθ
@@ -212,7 +210,6 @@ function flowH2Schwarzschild!(uj,ej,h,parms)
    y = r + pr*h
    r = sqrt(x^2+y^2)  
    pr = (aux*x + pr*y)/r  
-  # θ = θ - atan(y,x) 
    (sinθ,cosθ) = sincos(θ)
    θ = atan(sinθ*x-cosθ*y, cosθ*x+sinθ*y) 
    uj[1]=r

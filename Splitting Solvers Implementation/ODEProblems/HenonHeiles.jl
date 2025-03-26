@@ -19,6 +19,13 @@ function HenonHeliesHam(u,parms)
 end
 
 
+function HenonHeliesHam(u)
+
+    return HenonHeliesHam(u,[])
+
+
+end
+
 function H1(u)
 
     p1=u[3]
@@ -87,3 +94,47 @@ function flowH2HenonHeiles!(uj,ej,h,parms)
  end
 
 
+#
+# functions for SecondOrderODEProblem 
+#
+
+function HenonHeilesODE2nd!(ddu,du,u,par,t)
+
+    q1=u[1]
+    q2=u[2]
+    ddu[1]=-q1-2*q1*q2
+    ddu[2]=-q2-q1*q1+q2*q2
+
+    return nothing
+ 
+ end
+ 
+ 
+#
+# functions for DynamicalODEProblem 
+#
+
+function HenonHeilesODEv!(dv,q,v,par,t)
+
+   q1=q[1]
+   q2=q[2]
+   
+   dv[1]=-q1-2*q1*q2
+   dv[2]=-q2-q1*q1+q2*q2
+   
+   return nothing
+   
+end
+ 
+ 
+function HenonHeilesODEq!(dq,q,v,par,t)
+
+   p1=v[1]
+   p2=v[2]
+
+   dq[1]=p1
+   dq[2]=p2
+   
+   return nothing
+   
+end

@@ -1,4 +1,10 @@
-  
+
+#
+#  Initial values for Schwarzschild problem
+#  (polar coordinates)
+#  
+
+
 function InitialSchwarzschild(T = Float64)
     
     parms = BigFloat[0.995,4.6,8.9e-5]
