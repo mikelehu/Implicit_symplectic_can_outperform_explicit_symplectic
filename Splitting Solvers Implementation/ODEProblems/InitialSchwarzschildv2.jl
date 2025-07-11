@@ -1,7 +1,7 @@
 
 #
 #  Initial values for Schwarzschild problem
-#  (cartesian coordinates)
+#  (2025-07-09 cartesian coordinates)
 #  
 
 
@@ -19,9 +19,13 @@ function InitialSchwarzschildv2(T = Float64)
     pθ = r * sqrt(-1 -2*Ham_Schwarzschild(u0,parms))
     parms = convert.(T, parms)
  
-    x=r*cos(θ)
-    y=r*sin(θ)
-    u0 = convert.(T, [x, y, pr, pθ])
+    c=cos(θ)
+    s=sin(θ)
+    x=r*c
+    y=r*s
+    px=c*pr-s*pθ/r
+    py=s*pr+c*pθ/r
+    u0 = convert.(T, [x, y, px, py])
 
     return u0, parms
 
