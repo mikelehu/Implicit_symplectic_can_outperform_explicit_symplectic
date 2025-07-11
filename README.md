@@ -10,7 +10,7 @@ We present numerical experiments comparing SIMD-IRKGL16 with state-of-the-art hi
 - Julia implementation  of Splitting solvers
 
 - Jupyter notebooks with the experiments from the article
-(located in the "Experimets_Article" folder)
+(located in the "Experiments_Article" folder)
 
 
 ## Contact
