@@ -17,4 +17,4 @@ We present numerical experiments comparing SIMD-IRKGL16 with state-of-the-art hi
 
 If you have any questions or suggestions, feel free to open an issue or contact us at mikel.antonana@ehu.eus.
 
-Updated July 11, 2025
+Updated July 22, 2025
