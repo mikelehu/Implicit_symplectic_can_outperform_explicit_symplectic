@@ -23,7 +23,6 @@ end
 
 function run_many_IRKGL16(alg, prob, ddt0, HAM; nruns=1)
 
-
     u0=prob.u0
     parms=prob.p
     
@@ -44,7 +43,7 @@ function run_many_IRKGL16(alg, prob, ddt0, HAM; nruns=1)
         print(",",ddt0[i])    
         dt0=ddt0[i]
         
-        sols[i]=solve(prob,alg,dt=dt0,adaptive=false)
+        sols[i]=solve(prob,alg,dt=dt0, adaptive=false)
         if sols[i].retcode==ReturnCode.Success
            iters[i]=sols[i].stats.nfpiter
         else
@@ -59,11 +58,11 @@ function run_many_IRKGL16(alg, prob, ddt0, HAM; nruns=1)
         MaxΔHlocal[i]=maximum(H_lerr)
  
         # save_everystep=false
-        solx=solve(prob,alg,dt=dt0,adaptive=false,save_everystep = false)
+        solx=solve(prob,alg,dt=dt0,  adaptive=false,save_everystep = false)
         if solx.retcode==ReturnCode.Success
            cpus[i]=0.
            for k in 1:nruns
-               cpus[i]+=@elapsed solve(prob,alg,dt=dt0,adaptive=false, save_everystep = false)
+               cpus[i]+=@elapsed solve(prob,alg,dt=dt0, adaptive=false, save_everystep = false)
            end
            cpus[i]=cpus[i]/nruns
         else
