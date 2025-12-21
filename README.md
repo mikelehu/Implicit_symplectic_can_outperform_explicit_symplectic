@@ -1,31 +1,88 @@
 # SIMD-vectorized implicit symplectic integrators can outperform explicit symplectic ones
 
-## abstract
 
-The main purpose of this work is to present a SIMD-vectorized implementation of the symplectic 16th-order 8-stage implicit Runge-Kutta integrator based on collocation with Gauss-Legendre nodes (IRKGL16), and to show that it can outperform state-of-the-art symplectic explicit integrators for high-precision numerical integrations (in double-precision floating-point arithmetic) of non-stiff Hamiltonian ODE systems.  Our IRKGL16 integrator, implemented in Julia language, leverages Single Instruction Multiple Data (SIMD) based parallelism (in a way that is transparent to the user) to significantly enhance the performance of the sequential IRKGL16 implementation.
-We present numerical experiments comparing IRKGL16 with state-of-the-art high-order explicit symplectic methods for the numerical integration of several Hamiltonian systems in double-precision floating-point arithmetic.
+## Overview
 
+This repository contains the Julia implementation and numerical experiments
+supporting the article: 
+
+> *SIMD-vectorized implicit symplectic integrators can outperform explicit symplectic ones*
+
+The goal is to demonstrate that a SIMD-vectorized implementation of the
+16th-order Gauss–Legendre implicit Runge–Kutta method (IRKGL16) can outperform
+state-of-the-art explicit symplectic integrators for high-precision integration
+of non-stiff Hamiltonian systems.
+
+## How to reproduce the results
+
+This section describes how to reproduce the numerical experiments and figures
+presented in the preprint.
+
+
+### Environment
+- Julia ≥ 1.x
+- All dependencies are specified in `Project.toml` and `Manifest.toml`
+
+
+### Setup
+```julia
+julia --project
+] instantiate
+```
+
+### Running the experiments
+
+The Jupyter notebooks in the `Experiments_Article/` directory reproduce the
+figures and numerical results from the article.
+
+- Each notebook corresponds to a specific experiment or figure.
+
+- Notebooks can be run independently unless otherwise stated.
+
+- Figures are generated automatically when the notebooks are executed.
 
 ## Repository Contents
-
-### 1) Splitting Solvers Implementation  
+ 
 This folder contains the code and experiments associated with the article.
 
-- **Julia implementation of splitting solvers**  
+- **Splitting solvers (Julia implementation)**  
   Core algorithms developed and used in the study.
 
-- **Jupyter notebooks reproducing the experiments from the article**  
-  Located in the **`Experiments_Article`** folder. 
-  Running these notebooks generates the figures and numerical results presented in the article.
+- **`Experiments_Article/`**  
+  Jupyter notebooks reproducing the numerical experiments and figures from the article.
 
-- **Examples**  
-  The **`Examples`** folder provides illustrative notebooks demonstrating how to use the solvers on simple test problems.
 
-### 2) Other Benchmarks  
-- Additional benchmark results for the **IRKGL16** method.
+- **`Examples/`**   
+  Simple illustrative notebooks demonstrating how to use the solvers on test problems.
+
+- **`Other Benchmarks/`**  
+  Additional performance results for the IRKGL16 method.
+
+## IRKGL16 Solver
+
+This repository 
+[IRKGaussLegendre.jl](https://github.com/SciML/IRKGaussLegendre.jl) contains the IRKGL16 implementation
+
+## Citation
+
+If you use this code or reproduce results from this repository, please cite
+the associated preprint:
+
+```bibtex
+@article{Antonana2025IRKGL16,
+  title   = {SIMD-vectorized implicit symplectic integrators can outperform explicit symplectic ones},
+  author  = {Antonana, M., Makazaga, J., and Murua, A.},
+  journal = {arXiv preprint arXiv:2511.03655},
+  year    = {2025}
+}
+```
+
+This reference will be updated once the article is published.
+
+
 
 ## Contact
 
 If you have any questions or suggestions, feel free to open an issue or contact us at mikel.antonana@ehu.eus.
 
-Updated November 28, 2025
+Updated December 21, 2025
