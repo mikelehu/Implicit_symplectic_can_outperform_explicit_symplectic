@@ -16,7 +16,7 @@ of non-stiff Hamiltonian systems.
 ## How to reproduce the results
 
 This section describes how to reproduce the numerical experiments and figures
-presented in the preprint.
+presented in the article.
 
 
 ### Environment
@@ -66,18 +66,19 @@ This repository
 ## Citation
 
 If you use this code or reproduce results from this repository, please cite
-the associated preprint:
+the associated article:
 
 ```bibtex
-@article{Antonana2025IRKGL16,
+@article{Antonana2026IRKGL16,
   title   = {SIMD-vectorized implicit symplectic integrators can outperform explicit symplectic ones},
-  author  = {Antonana, M., Makazaga, J., and Murua, A.},
-  journal = {arXiv preprint arXiv:2511.03655},
-  year    = {2025}
+  author  = {Antonana, M. and Makazaga, J. and Murua, A.},
+  journal = {Numerical Algorithms},
+  year  = {2026},
+  doi = {10.1007/s11075-026-02370-3}
+
 }
 ```
 
-This reference will be updated once the article is published.
 
 
 
@@ -85,4 +86,4 @@ This reference will be updated once the article is published.
 
 If you have any questions or suggestions, feel free to open an issue or contact us at mikel.antonana@ehu.eus.
 
-Updated February 23, 2026
+Updated April 09, 2026
